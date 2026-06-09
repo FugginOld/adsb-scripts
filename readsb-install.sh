@@ -145,7 +145,12 @@ cd "$ipath/git"
 make clean
 THREADS=$(( $(grep -c ^processor /proc/cpuinfo) - 1 ))
 THREADS=$(( THREADS > 0 ? THREADS : 1 ))
-CFLAGS="-O2 -march=native -mtune=native"
+ARCH="$(uname -m)"
+if [[ "$ARCH" == riscv* ]]; then
+    CFLAGS="-O2"
+else
+    CFLAGS="-O2 -march=native -mtune=native"
+fi
 
 # disable unaligned access for arm 32bit ...
 if uname -m | grep -qs -e arm -e aarch64 && gcc -mno-unaligned-access hello.c -o /dev/null &>/dev/null; then
