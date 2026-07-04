@@ -20,7 +20,7 @@ if [ -f /boot/piaware-config.txt ]; then
     exit 1
 fi
 
-BRANCH="stale"
+BRANCH="dev"
 if grep -E 'wheezy|jessie' /etc/os-release -qs; then
     BRANCH="jessie"
 fi
@@ -55,7 +55,7 @@ function copyNoClobber() {
     fi
 }
 
-repository="https://github.com/wiedehopf/readsb.git"
+repository="https://github.com/FugginOld/readsb.git"
 
 
 if [[ -n "$push_30004" ]]; then
@@ -89,7 +89,7 @@ mkdir -p $ipath
 
 if grep -E 'wheezy|jessie' /etc/os-release -qs; then
     # make sure the rtl-sdr rules are present on ancient systems
-    wget -O /tmp/rtl-sdr.rules https://raw.githubusercontent.com/wiedehopf/adsb-scripts/master/osmocom-rtl-sdr.rules
+    wget -O /tmp/rtl-sdr.rules https://raw.githubusercontent.com/FugginOld/adsb-scripts/master/osmocom-rtl-sdr.rules
     cp /tmp/rtl-sdr.rules /etc/udev/rules.d/
 fi
 
